@@ -4,8 +4,8 @@
 
 #r "../packages/FAKE/tools/FakeLib.dll"
 #r "../packages/Suave/lib/net40/Suave.dll"
-#r @"../packages/Newtonsoft.Json/lib/net45/Newtonsoft.Json.dll"
-#r @"../packages/FifteenBelow.Json/lib/net40/FifteenBelow.Json.dll"
+#r "../packages/Newtonsoft.Json/lib/net45/Newtonsoft.Json.dll"
+#r "../packages/FifteenBelow.Json/lib/net40/FifteenBelow.Json.dll"
 
 #load "Utils.fsx"
 #load "Types.fsx"
