@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>
+    <script src="i18n/angular-locale_de-de.js"></script>
+    <script src="//cdn.jsdelivr.net/bootstrap.native/0.9.6/bootstrap-native.min.js"></script>
+    <script>
+        var movietimes = angular.module('movietimes', [])
+        movietimes.controller('MovieTimesCtrl', function ($scope, $http) {
+            $scope.movies = [];
+            $http.get('/live').success(function (data) {
+                $scope.movies = data;
+            });
+        });
+    </script>
+</head>
+<body ng-app="movietimes">
+    <div ng-controller="MovieTimesCtrl" class="container">
+        <h3>Jetzt Live</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Sender</th>
+                    <th>Titel</th>
+                    <th>Untertitel</th>
+                    <th>Beginn</th>
+                    <th>Ende</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="(channelName,movie) in movies" ng-cloak>
+                    <th>
+                        <img ng-if="movie.logoUrl" ng-src="{{movie.logoUrl}}" title="{{channelName}}" />
+                    </th>
+                    <td>
+                        <a ng-if="movie.url" href="{{movie.sendung.url}}" target="_blank">{{movie.sendung.titel}}</a>
+                        <span ng-if="!movie.url">{{movie.sendung.titel}}</span>
+                    </td>
+                    <td>{{movie.sendung.untertitel}}</td>
+                    <td>{{movie.sendung.beginn | date:'shortTime'}}</td>
+                    <td>{{movie.sendung.ende | date:'shortTime'}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="container">
+        <h3>Tagesprogramm</h3>
+        <div id="chart_div" style="overflow: scroll"></div>
+    </div>
+    <script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization', 'version':'1','packages':['timeline']}]}"></script>
+    <script src="es6-promise.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

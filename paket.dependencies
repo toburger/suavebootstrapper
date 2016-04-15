@@ -1,4 +1,7 @@
 source https://nuget.org/api/v2
 
 nuget FAKE
+nuget FifteenBelow.Json
+nuget FSharp.Data
 nuget Suave
+nuget XPlot.GoogleCharts.WPF
